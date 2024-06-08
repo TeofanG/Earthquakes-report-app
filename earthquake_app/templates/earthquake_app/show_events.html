@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'earthquake_app/styles.css' %}">
+  <title>Document</title>
+</head>
+<body>
+  {% block content %}
+  <h1 style="left:50px; ">Events</h1>
+  <form method="get" action="{% url 'earthquake_app:show_events' %}" style="margin:30px">
+    <label for="magnitude">Magnitude:</label>
+    <input type="number" name="magnitude" step="0.1">
+
+    <label for="magnitude">Depth:</label>
+    <input type="number" name="depth" step="0.1">
+    <button type="submit">Filter</button>
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Magnitude</th>
+        <th>Depth</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+        <tr>
+          <td>{{ event.start_time }}</td>
+          <td>{{ event.end_time }}</td>
+          <td>{{ event.magnitude }}</td>
+          <td>{{ event.depth }}</td>
+          <td>{{ event.latitude }}</td>
+          <td>{{ event.longitude }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+</body>
+</html>
+
